@@ -28,7 +28,7 @@
           <input type="text" v-model="el.edited.lastName" />
           <input type="text" v-model="el.edited.age" />
           <button @click="saveData(index)" id="saveButton">Save</button>
-          <button @click="cancelEditing(index)" id="cancelButton">Cancel</button>
+          <button @click="cancelEditing(el)" id="cancelButton">Cancel</button>
         </div>
       </li>
     </div>
@@ -87,13 +87,13 @@ export default {
         this.name = "";
         this.surname = "";
         this.age2 = "";
-      } else if(!this.name || !this.surname || !this.age2){
+      } else {
         alert("You need to fill in all inputs!")
       }
     },
     deleteInformation(index) {
       if (confirm("Do you want to delete this?")) {
-        this.information.splice(index);
+        this.information = this.information.filter((el, i) => i !== index);
       }
     },
     startEditing(index) {
@@ -117,11 +117,11 @@ export default {
       editedData.editing = false;
       
     },
-    cancelEditing(index) {
-      this.information[index].editing = false;
-      this.information[index].edited.firstName = "";
-      this.information[index].edited.lastName = "";
-      this.information[index].edited.age = "";
+    cancelEditing(elem) {
+      elem.editing = false;
+      elem.edited.firstName = "";
+      elem.edited.lastName = "";
+      elem.edited.age = "";
     },
   },
 };
