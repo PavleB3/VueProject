@@ -13,7 +13,7 @@
         :class="{ minor: el.age < 18, adult: el.age >= 18 }"
       >
         {{ el.firstName }} {{ el.lastName }} {{ el.fullName }} {{ el.age }}
-        <button v-if="el.showEdit" id="editButton" @click="startEditing(index)">
+        <button v-if="el.showEdit" id="editButton" @click="startEditing(el)">
           Edit
         </button>
         <button
@@ -27,7 +27,7 @@
           <input type="text" v-model="el.edited.firstName" />
           <input type="text" v-model="el.edited.lastName" />
           <input type="text" v-model="el.edited.age" />
-          <button @click="saveData(index)" id="saveButton">Save</button>
+          <button @click="saveData(el)" id="saveButton">Save</button>
           <button @click="cancelEditing(el)" id="cancelButton">Cancel</button>
         </div>
       </li>
@@ -88,40 +88,42 @@ export default {
         this.surname = "";
         this.age2 = "";
       } else {
-        alert("You need to fill in all inputs!")
+        alert("You need to fill in all inputs!");
       }
     },
     deleteInformation(index) {
       if (confirm("Do you want to delete this?")) {
-        this.information = this.information.filter((el, i) => i !== index);
+        this.information = this.information.filter((el, i) => i != index);
       }
     },
-    startEditing(index) {
-      this.information[index].editing = true;
-      this.information[index].edited.firstName =
-        this.information[index].firstName;
-      this.information[index].edited.lastName =
-        this.information[index].lastName;
-      this.information[index].edited.age = this.information[index].age;
+    startEditing(el) {
+      el.editing = true;
+      el.edited.firstName = el.firstName;
+      el.edited.lastName = el.lastName;
+      el.edited.age = el.age;
     },
-    saveData(index) {
-      const editedData = this.information[index];
-      if(!editedData.edited.firstName || !editedData.edited.lastName || !editedData.edited.age){
-        alert("You need to fill in all inputs!")
+    saveData(el) {
+      const editedData = el;
+      if (
+        !editedData.edited.firstName ||
+        !editedData.edited.lastName ||
+        !editedData.edited.age
+      ) {
+        alert("You need to fill in all inputs!");
         return;
       }
       editedData.firstName = editedData.edited.firstName;
       editedData.lastName = editedData.edited.lastName;
       editedData.age = editedData.edited.age;
-      editedData.fullName = ", " + editedData.edited.firstName + " " + editedData.edited.lastName;
+      editedData.fullName =
+        ", " + editedData.edited.firstName + " " + editedData.edited.lastName;
       editedData.editing = false;
-      
     },
-    cancelEditing(elem) {
-      elem.editing = false;
-      elem.edited.firstName = "";
-      elem.edited.lastName = "";
-      elem.edited.age = "";
+    cancelEditing(el) {
+      el.editing = false;
+      el.edited.firstName = "";
+      el.edited.lastName = "";
+      el.edited.age = "";
     },
   },
 };
@@ -129,10 +131,10 @@ export default {
 
 <style>
 #wrapper {
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform: translate(-50%,-50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background: grey;
   width: 800px;
   height: 100vh;
@@ -190,16 +192,16 @@ li {
   color: white;
   background: black;
 }
-input:focus{
-  outline:none;
+input:focus {
+  outline: none;
 }
-button:hover{
-  cursor:pointer;
+button:hover {
+  cursor: pointer;
 }
-#saveButton{
-  margin-left:10px;
+#saveButton {
+  margin-left: 10px;
 }
-#cancelButton{
-  margin-left:5px;
+#cancelButton {
+  margin-left: 5px;
 }
 </style>
