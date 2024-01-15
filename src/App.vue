@@ -49,6 +49,7 @@ export default {
           firstName: "",
           lastName: "",
           age: "",
+          fullName: "",
           adult: false,
           showEdit: false,
           showDelete: false,
@@ -75,6 +76,7 @@ export default {
           firstName: this.name,
           lastName: this.surname,
           age: this.age2,
+          fullName: this.name + " " + this.surname,
           showEdit: true,
           showDelete: true,
           editing: false,
@@ -127,7 +129,11 @@ export default {
       this.information[index].edited.age = "";
     },
     nameInformation(el) {
-      return `${el.firstName} ${el.lastName}, ${el.firstName} ${el.lastName}, ${el.age}`;
+      const valuesTojoin = [el.firstName, el.lastName, el.age, el.fullName];
+      const validValues = valuesTojoin.filter(
+        (value) => value !== "" && value !== null && value !== undefined
+      );
+      return validValues.join(", ");
     },
   },
 };
