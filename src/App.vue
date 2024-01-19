@@ -1,10 +1,11 @@
 <template>
-  <div id="wrapper">
+  <div id="wrapper" v-if="$route.path !== '/example'">
     <div id="inputs">
       <input type="text" placeholder="Name" v-model="name" />
       <input type="text" placeholder="Surname" v-model="surname" />
       <input type="text" placeholder="Age" v-model="age2" />
       <button @click="insertData()" id="insertButton">Insert</button>
+      <RouterLink to="/example" id="link">Example</RouterLink>
     </div>
     <div id="list">
       <li
@@ -35,9 +36,11 @@
       </li>
     </div>
   </div>
+  <RouterView/>
 </template>
 
 <script>
+import { RouterLink, RouterView } from 'vue-router'
 export default {
   data() {
     return {
@@ -164,6 +167,7 @@ export default {
   height: 20px;
   width: 70px;
   margin-right: 10px;
+  margin-top:2px;
   border: none;
 }
 #insertButton:hover {
@@ -213,5 +217,19 @@ button:hover {
 }
 #cancelButton {
   margin-left: 5px;
+}
+#link{
+  margin-right:10px;
+  color:white;
+  background:blue;
+  width:70px;
+  display:flex;
+  justify-content: center;
+  border-radius:5px;
+  background:darkgray;
+  cursor:pointer;
+}
+#link:hover{
+  background:black;
 }
 </style>
