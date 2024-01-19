@@ -3,7 +3,7 @@
         <h1 id="headerOne">Axios Post Example</h1>
         <div id="post">
             <div>
-                <label for="userId">userId:</label>
+                <label for="userId"> userId:</label>
                 <input type="text" id="userId" v-model="postData.userId">
             </div>
             <div>
