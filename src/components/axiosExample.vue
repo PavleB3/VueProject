@@ -4,15 +4,15 @@
         <div id="post">
             <div>
                 <label for="userId"> userId:</label>
-                <input type="text" id="userId" v-model="postData.userId">
+                <input type="text" id="userId" v-model="postDataPost.userId">
             </div>
             <div>
                 <label for="title">Title:</label>
-                <input type="text" id="title" v-model="postData.title">
+                <input type="text" id="title" v-model="postDataPost.title">
             </div>
             <div>
                 <label for="body">Body:</label>
-                <input type="text" id="body" v-model="postData.body">
+                <input type="text" id="body" v-model="postDataPost.body">
             </div>
             <button @click="post">Post</button>
         </div>
@@ -20,20 +20,33 @@
             <h1 id="headerTwo">Axios Get Example</h1>
             <label for="getButton" id="getLabel">Click here for Get request:</label>
             <button id="getButton" @click="getPosts">Get</button>
-            <div v-if="getFetchedPosts.length>0" id="getPosts">
-            <h2>Get posts:</h2>
-            <ul>
-                <li v-for="post in getFetchedPosts" :key="post">
-                    <p>userId: {{ post.userId }}</p>
-                    <p>id: {{ post.id }}</p>
-                    <p>title: {{ post.title }}</p>
-                </li>
-            </ul>
+            <div v-if="getFetchedPosts.length > 0" id="getPosts">
+                <h2>Get posts:</h2>
+                <ul>
+                    <li v-for="post in getFetchedPosts" :key="post">
+                        <p>userId: {{ post.userId }}</p>
+                        <p>id: {{ post.id }}</p>
+                        <p>title: {{ post.title }}</p>
+                    </li>
+                </ul>
             </div>
         </div>
         <h1>Axios Put Example</h1>
-        <label for="putButton" id="putLabel">Click here for Put request:</label>
-        <button id="putButton" @click="put">Put</button>
+        <div id="put">
+            <div>
+                <label for="userId"> userId:</label>
+                <input type="text" id="userId" v-model="postDataPut.userId">
+            </div>
+            <div>
+                <label for="title">Title:</label>
+                <input type="text" id="title" v-model="postDataPut.title">
+            </div>
+            <div>
+                <label for="body">Body:</label>
+                <input type="text" id="body" v-model="postDataPut.body">
+                <button id="putButton" @click="put">Put</button>
+            </div>
+        </div>
         <h1>Axios Delete Example</h1>
         <label for="deleteButton" id="deleteLabel">Click here for Delete request:</label>
         <button id="deleteButton" @click="deletePost">Delete</button>
@@ -52,8 +65,11 @@ export default {
         ...mapGetters([
             'getFetchedPosts'
         ]),
-        postData() {
-            return this.$store.state.postData
+        postDataPost() {
+            return this.$store.state.postDataPost
+        },
+        postDataPut() {
+            return this.$store.state.postDataPut
         },
     },
     methods: {
@@ -63,7 +79,7 @@ export default {
             'put',
             'deletePost'
         ]),
-        getPosts(){
+        getPosts() {
             this.get()
         }
     }
@@ -98,10 +114,12 @@ export default {
     background: darkgray;
     border: none;
 }
-h1{
+
+h1 {
     margin-left: 10px;
     color: white;
 }
+
 #getLabel {
     margin-left: 10px;
     font-size: 17px;
@@ -114,49 +132,83 @@ h1{
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-bottom:20px;
+    margin-bottom: 20px;
 }
 
 #getButton:hover {
     background: darkgrey;
 }
-#putButton{
+
+#putButton {
     background: rgba(24, 28, 32, 0.68);
     margin-left: 10px;
     width: 100px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-bottom:20px;
+    margin-bottom: 20px;
 }
-#putButton:hover{
-    background:darkgrey;
+
+#putButton:hover {
+    background: darkgrey;
 }
-#putLabel{
-    margin-left:10px;
-    font-size:17px;
+
+#putLabel {
+    margin-left: 10px;
+    font-size: 17px;
 }
-h2{
-    color:white;
-    margin-left:10px;
+
+h2 {
+    color: white;
+    margin-left: 10px;
 }
-p{
-    font-size:15px;
+
+p {
+    font-size: 15px;
 }
-#deleteButton{
+
+#deleteButton {
     background: rgba(24, 28, 32, 0.68);
     margin-left: 10px;
     width: 100px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-bottom:20px;
+    margin-bottom: 20px;
 }
-#deleteButton:hover{
-    background:darkgrey;
+
+#deleteButton:hover {
+    background: darkgrey;
 }
-#deleteLabel{
-    margin-left:10px;
-    font-size:17px;
+
+#deleteLabel {
+    margin-left: 10px;
+    font-size: 17px;
 }
-</style>
+
+#put {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#put input {
+    margin-left: 30px;
+}
+
+#putButton {
+    background: rgba(24, 28, 32, 0.68);
+    width: 100px;
+    height: 20px;
+    margin-top: 27px;
+    border-radius: 5px;
+    border: none;
+}
+
+#put label {
+    position: absolute;
+    top: 1px;
+    margin-left: 35px;
+}</style>

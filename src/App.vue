@@ -8,20 +8,12 @@
       <RouterLink to="/example" id="link">Example</RouterLink>
     </div>
     <div id="list">
-      <li
-        v-for="(el, index) in information"
-        :key="index"
-        :class="{ minor: el.age < 18, adult: el.age >= 18 }"
-      >
+      <li v-for="(el, index) in information" :key="index" :class="{ minor: el.age < 18, adult: el.age >= 18 }">
         {{ nameInformation(el) }}
         <button v-if="el.showEdit" id="editButton" @click="startEditing(index)">
           Edit
         </button>
-        <button
-          v-if="el.showDelete"
-          id="deleteButton"
-          @click="deleteInformation(index)"
-        >
+        <button v-if="el.showDelete" id="deleteButton" @click="deleteInformation(index)">
           Delete
         </button>
         <div v-if="el.editing">
@@ -36,7 +28,7 @@
       </li>
     </div>
   </div>
-  <RouterView/>
+  <RouterView />
 </template>
 
 <script>
@@ -152,28 +144,33 @@ export default {
   width: 800px;
   height: 100vh;
 }
+
 #inputs {
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
   margin-left: 10px;
 }
+
 #inputs input {
   border-radius: 5px;
   border: none;
 }
+
 #insertButton {
   border-radius: 5px;
   height: 20px;
   width: 70px;
   margin-right: 10px;
-  margin-top:2px;
+  margin-top: 2px;
   border: none;
 }
+
 #insertButton:hover {
   color: white;
   background: black;
 }
+
 li {
   list-style-type: none;
   font-size: 25px;
@@ -181,55 +178,66 @@ li {
   margin-top: 20px;
   font-weight: 500;
 }
+
 .adult {
   color: green;
 }
+
 .minor {
   color: red;
 }
+
 #editButton {
   border-radius: 5px;
   border: none;
   width: 50px;
 }
+
 #deleteButton {
   border-radius: 5px;
   border: none;
   width: 50px;
   margin-left: 10px;
 }
+
 #deleteButton:hover {
   color: white;
   background: black;
 }
+
 #editButton:hover {
   color: white;
   background: black;
 }
+
 input:focus {
   outline: none;
 }
+
 button:hover {
   cursor: pointer;
 }
+
 #saveButton {
   margin-left: 10px;
 }
+
 #cancelButton {
   margin-left: 5px;
 }
-#link{
-  margin-right:10px;
-  color:white;
-  background:blue;
-  width:70px;
-  display:flex;
+
+#link {
+  margin-right: 10px;
+  color: white;
+  background: blue;
+  width: 70px;
+  display: flex;
   justify-content: center;
-  border-radius:5px;
-  background:darkgray;
-  cursor:pointer;
+  border-radius: 5px;
+  background: darkgray;
+  cursor: pointer;
 }
-#link:hover{
-  background:black;
-}
-</style>
+
+#link:hover {
+  background: black;
+}</style>
